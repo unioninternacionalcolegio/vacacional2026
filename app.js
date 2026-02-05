@@ -1,9 +1,21 @@
 // 🔥 Firebase SDK (MODULAR)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
 
-// 🔐 TU CONFIGURACIÓN (YA ES CORRECTA)
+// 🔐 CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyCd3qZLVtREsX4RbTKBC8qqBrnGW2iarpw",
   authDomain: "vacacional2026-bd295.firebaseapp.com",
@@ -13,13 +25,21 @@ const firebaseConfig = {
   appId: "1:544449802911:web:8fec071d6326e7f2b3e8aa"
 };
 
-// Inicializar Firebase
+// 🚀 INIT
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+// 🔒 ESTADO DEL MURO
+let muroCerrado = false;
+
 // 🎯 GUARDAR RECUERDO
 window.guardarRecuerdo = async function () {
+  if (muroCerrado) {
+    alert("🔒 El muro está cerrado");
+    return;
+  }
+
   const nombre = document.getElementById("nombre").value.trim();
   const comentario = document.getElementById("comentario").value.trim();
   const foto = document.getElementById("foto").files[0];
@@ -44,18 +64,33 @@ window.guardarRecuerdo = async function () {
       fecha: new Date()
     });
 
-    estado.innerText = "✅ Recuerdo guardado con éxito";
+    // 🎉 CONFETTI
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+
+    // 🔊 SONIDO
+    const audio = document.getElementById("sonidoGuardar");
+    audio.currentTime = 0;
+    audio.play();
+
+    estado.innerText = "✅ Recuerdo guardado";
+
+    // 🧼 LIMPIAR
     document.getElementById("nombre").value = "";
     document.getElementById("comentario").value = "";
     document.getElementById("foto").value = "";
+    document.getElementById("preview").style.display = "none";
 
   } catch (error) {
     console.error(error);
-    estado.innerText = "❌ Error al guardar el recuerdo";
+    estado.innerText = "❌ Error al guardar";
   }
 };
 
-// 🧡 MOSTRAR RECUERDOS EN TIEMPO REAL
+// 🧡 MOSTRAR RECUERDOS
 const muro = document.getElementById("muro");
 
 const q = query(
@@ -64,7 +99,7 @@ const q = query(
 );
 
 onSnapshot(q, (snapshot) => {
-  muro.innerHTML = "<h2>🧡 Recuerdos</h2>";
+  muro.innerHTML = "";
 
   snapshot.forEach((doc) => {
     const r = doc.data();
@@ -77,37 +112,31 @@ onSnapshot(q, (snapshot) => {
     `;
   });
 });
-let muroCerrado = false;
 
-window.frase = (texto) => {
-  document.getElementById("comentario").value = texto;
-};
-
+// 🧼 LIMPIAR MANUAL
 window.limpiar = () => {
-  nombre.value = "";
-  comentario.value = "";
-  foto.value = "";
+  document.getElementById("nombre").value = "";
+  document.getElementById("comentario").value = "";
+  document.getElementById("foto").value = "";
+  document.getElementById("preview").style.display = "none";
 };
 
+// 🔒 CERRAR MURO
 window.cerrarMuro = () => {
-  if (confirm("¿Cerrar el muro?")) {
+  if (confirm("¿Cerrar el muro de recuerdos?")) {
     muroCerrado = true;
-    document.getElementById("formulario").style.display = "none";
+    document.querySelector(".formulario").style.display = "none";
   }
 };
 
+// 👩‍🏫 MODO PROFES
 window.modoProfe = () => {
   const clave = prompt("Clave de profesores:");
   if (clave === "union2026") {
-    document.getElementById("formulario").style.display = "block";
     muroCerrado = false;
+    document.querySelector(".formulario").style.display = "block";
+    alert("✅ Modo profesor activado");
   } else {
-    alert("Clave incorrecta");
+    alert("❌ Clave incorrecta");
   }
 };
-
-// dentro de guardarRecuerdo(), agrega:
-document.getElementById("sonido").play();
-confetti({ particleCount: 150, spread: 70 });
-
-
