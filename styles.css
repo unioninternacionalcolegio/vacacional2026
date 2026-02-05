@@ -92,27 +92,29 @@ body {
 /* 💬 FRASES */
 .frases {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
+  gap: 8px;
   justify-content: center;
+  flex-wrap: nowrap;
+  margin-bottom: 12px;
 }
 
 .frases button {
   background: #fde68a;
   border: none;
-  padding: 8px 12px;
-  border-radius: 20px;
+  padding: 6px 10px;
+  border-radius: 18px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 700;
+  white-space: nowrap;
   transition: transform 0.2s, background 0.2s;
 }
 
 .frases button:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
   background: #fcd34d;
 }
+
 
 /* 📸 PREVIEW */
 .preview {
