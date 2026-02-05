@@ -4,78 +4,59 @@
   <meta charset="UTF-8">
   <title>Clausura Vacacional 2026 | Colegio Unión</title>
 
-  <!-- 🎒 Fuente educativa -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- Fuente educativa -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- 🎨 Estilos -->
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-  <!-- 🏫 HEADER CON LOGOS -->
-  <header class="header">
-    <img src="logo-colegio.png" class="logo-izq" alt="Logo Colegio Unión">
+<header class="top">
+  <img src="logo.png" class="logo">
+  <div class="titulo">
+    <h1>🎓 Clausura Vacacional 2026</h1>
+    <p>Colegio Unión – Muro de Recuerdos</p>
+  </div>
+  <img src="decoracion.png" class="decoracion">
+</header>
 
-    <div class="titulo">
-      <h1>Clausura Vacacional 2026</h1>
-      <p>Colegio Unión – Muro de Recuerdos</p>
-    </div>
+<section class="formulario" id="formulario">
+  <h2>📸 Comparte tu recuerdo</h2>
 
-    <img src="imagen-derecha.png" class="logo-der" alt="Vacacional">
-  </header>
+  <label>Mi nombre es:</label>
+  <input type="text" id="nombre">
 
-  <!-- ✍️ FORMULARIO -->
-  <section class="formulario">
-    <h2>📸 Comparte tu recuerdo</h2>
+  <label>Mi recuerdo:</label>
+  <textarea id="comentario"></textarea>
 
-    <label class="label">Mi nombre es:</label>
-    <input type="text" id="nombre" placeholder="Escribe tu nombre">
+  <div class="frases">
+    <button onclick="frase('Me gustó porque conocí a mi mejor amigo 💙')">👫 Amigos</button>
+    <button onclick="frase('Tuve la maestra más atenta 👩‍🏫')">🍎 Maestra</button>
+    <button onclick="frase('Aprendí muchas cosas nuevas 📚')">✨ Aprender</button>
+  </div>
 
-    <label class="label">Mi recuerdo:</label>
-    <textarea id="comentario" placeholder="Escribe tu recuerdo aquí..."></textarea>
+  <input type="file" id="foto" accept="image/*">
 
-    <!-- ✨ FRASES PREDEFINIDAS -->
-    <div class="frases">
-      <button type="button" onclick="ponerFrase('Me gustó porque conocí a mi mejor amigo')">💛 Mejor amigo</button>
-      <button type="button" onclick="ponerFrase('Tuve la maestra más atenta')">👩‍🏫 Maestra</button>
-      <button type="button" onclick="ponerFrase('Me gustó porque aprendí mucho')">📚 Aprendizaje</button>
-    </div>
+  <button onclick="guardarRecuerdo()">Guardar recuerdo 🎉</button>
+  <button class="limpiar" onclick="limpiar()">🧹 Limpiar</button>
 
-    <!-- 📷 FOTO -->
-    <input type="file" id="foto" accept="image/*" onchange="previewFoto()">
+  <p id="estado"></p>
+</section>
 
-    <!-- 👀 PREVIEW -->
-    <img id="preview" class="preview" alt="Vista previa">
+<section class="controles">
+  <button onclick="cerrarMuro()">🔒 Cerrar muro</button>
+  <button onclick="modoProfe()">👩‍🏫 Modo profesores</button>
+</section>
 
-    <button class="btn-guardar" onclick="guardarRecuerdo()">Guardar recuerdo 💙</button>
-    <p id="estado"></p>
-  </section>
+<section class="muro" id="muro"></section>
 
-  <!-- 🧡 MURAL -->
-  <section class="muro" id="muro">
-    <h2>🧡 Recuerdos</h2>
-    <!-- aquí Firebase pinta los recuerdos -->
-  </section>
+<!-- sonidos -->
+<audio id="sonido" src="pop.mp3"></audio>
 
-  <!-- 🔥 APP PRINCIPAL (NO TOCAR) -->
-  <script type="module" src="./app.js"></script>
+<!-- confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- ✨ JS UI (NO FIREBASE) -->
-  <script>
-    function ponerFrase(texto) {
-      document.getElementById("comentario").value = texto;
-    }
-
-    function previewFoto() {
-      const file = document.getElementById("foto").files[0];
-      const img = document.getElementById("preview");
-      if (file) {
-        img.src = URL.createObjectURL(file);
-        img.style.display = "block";
-      }
-    }
-  </script>
-
+<script type="module" src="./app.js"></script>
 </body>
 </html>
+
