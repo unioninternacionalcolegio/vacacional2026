@@ -5,12 +5,12 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 
 // 🔐 TU CONFIGURACIÓN (YA ES CORRECTA)
 const firebaseConfig = {
-  apiKey: "AIzaSyBfVMmztzkntRXsJpwSb0czd4-WQPIm64I",
-  authDomain: "vacacional2026-b095d.firebaseapp.com",
-  projectId: "vacacional2026-b095d",
-  storageBucket: "vacacional2026-b095d.firebasestorage.app",
-  messagingSenderId: "278906276377",
-  appId: "1:278906276377:web:8b414a7a434ee0762ab888"
+  apiKey: "AIzaSyCd3qZLVtREsX4RbTKBC8qqBrnGW2iarpw",
+  authDomain: "vacacional2026-bd295.firebaseapp.com",
+  projectId: "vacacional2026-bd295",
+  storageBucket: "vacacional2026-bd295.firebasestorage.app",
+  messagingSenderId: "544449802911",
+  appId: "1:544449802911:web:8fec071d6326e7f2b3e8aa"
 };
 
 // Inicializar Firebase
