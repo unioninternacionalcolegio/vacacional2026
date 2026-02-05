@@ -1,67 +1,237 @@
+/* 🌈 RESET BÁSICO */
+* {
+  box-sizing: border-box;
+}
+
+/* 🎒 GENERAL */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  background: #f2f6ff;
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(180deg, #f2f6ff, #ffffff);
+  color: #1f2937;
 }
 
-header {
-  background: #1e3a8a;
+/* 🏫 HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
   color: white;
-  text-align: center;
-  padding: 20px;
 }
 
+.logo-izq,
+.logo-der {
+  height: 80px;
+}
+
+.titulo {
+  text-align: center;
+}
+
+.titulo h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 900;
+}
+
+.titulo p {
+  margin: 5px 0 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* ✍️ FORMULARIO */
 .formulario {
   background: white;
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  max-width: 520px;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+  animation: aparecer 0.6s ease;
+}
+
+.formulario h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: 700;
+  margin-top: 10px;
+  display: block;
 }
 
 .formulario input,
 .formulario textarea {
   width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #dbeafe;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
 }
 
-.formulario button {
+.formulario textarea {
+  resize: none;
+  height: 90px;
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* 💬 FRASES */
+.frases {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.frases button {
+  background: #fde68a;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: transform 0.2s;
+}
+
+.frases button:hover {
+  transform: scale(1.05);
+}
+
+/* 📸 PREVIEW */
+.preview {
+  display: none;
+  margin: 10px auto;
+  max-width: 200px;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  animation: zoomIn 0.4s ease;
+}
+
+/* 💙 BOTÓN */
+.btn-guardar {
   width: 100%;
   background: #2563eb;
   color: white;
   border: none;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 14px;
+  border-radius: 14px;
   cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: background 0.3s, transform 0.2s;
 }
 
-.formulario button:hover {
+.btn-guardar:hover {
   background: #1d4ed8;
+  transform: scale(1.02);
 }
 
+/* 🧡 MURO */
 .muro {
-  max-width: 900px;
+  max-width: 1200px;
   margin: auto;
-  padding: 20px;
+  padding: 20px 30px 50px;
 }
 
+.muro h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* 🧱 GRID */
+#muro {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* 📸 POLAROID */
 .recuerdo {
   background: white;
-  margin-bottom: 20px;
-  padding: 15px;
+  padding: 12px;
   border-radius: 10px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: aparecer 0.5s ease;
+}
+
+.recuerdo:hover {
+  transform: rotate(0deg) scale(1.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  z-index: 10;
 }
 
 .recuerdo img {
   width: 100%;
-  max-height: 300px;
+  height: 200px;
   object-fit: cover;
   border-radius: 8px;
 }
 
 .recuerdo h3 {
-  margin: 10px 0 5px;
+  margin: 8px 0 4px;
+  font-size: 1.05rem;
+}
+
+.recuerdo p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+/* ✨ ANIMACIONES */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-3deg);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .logo-izq,
+  .logo-der {
+    height: 60px;
+  }
+
+  .titulo h1 {
+    font-size: 1.8rem;
+  }
+
+  .recuerdo {
+    transform: rotate(-1deg);
+  }
 }
