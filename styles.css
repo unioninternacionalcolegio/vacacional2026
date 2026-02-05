@@ -7,9 +7,11 @@
 body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
-  background: linear-gradient(180deg, #f2f6ff, #ffffff);
+  background:
+    linear-gradient(to top, #a7f3d0 0%, #d1fae5 20%, #f2f6ff 50%, #ffffff 100%);
   color: #1f2937;
 }
+
 
 /* 🏫 HEADER */
 .header {
