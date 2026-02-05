@@ -91,6 +91,29 @@
       }
     }
   </script>
+<!-- 🎉 Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<!-- 🔊 Sonido -->
+<audio id="sonidoGuardar" src="sonido.mp3" preload="auto"></audio>
+
+<script>
+  // 🎉 Confetti
+  function lanzarConfetti() {
+    confetti({
+      particleCount: 120,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
+
+  // 🔊 Sonido
+  function reproducirSonido() {
+    const audio = document.getElementById("sonidoGuardar");
+    audio.currentTime = 0;
+    audio.play();
+  }
+</script>
 
 </body>
 </html>
