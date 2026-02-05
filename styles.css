@@ -19,11 +19,13 @@ body {
   padding: 20px 30px;
   background: linear-gradient(135deg, #1e3a8a, #2563eb);
   color: white;
+  gap: 20px;
 }
 
 .logo-izq,
 .logo-der {
   height: 80px;
+  flex-shrink: 0;
 }
 
 .titulo {
@@ -78,7 +80,7 @@ body {
 
 .formulario textarea {
   resize: none;
-  height: 90px;
+  height: 100px;
 }
 
 .formulario input:focus,
@@ -93,26 +95,29 @@ body {
   gap: 10px;
   flex-wrap: wrap;
   margin-bottom: 10px;
+  justify-content: center;
 }
 
 .frases button {
   background: #fde68a;
   border: none;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.85rem;
-  transition: transform 0.2s;
+  font-weight: 700;
+  transition: transform 0.2s, background 0.2s;
 }
 
 .frases button:hover {
   transform: scale(1.05);
+  background: #fcd34d;
 }
 
 /* 📸 PREVIEW */
 .preview {
   display: none;
-  margin: 10px auto;
+  margin: 15px auto;
   max-width: 200px;
   border-radius: 12px;
   box-shadow: 0 8px 15px rgba(0,0,0,0.2);
@@ -129,25 +134,26 @@ body {
   border-radius: 14px;
   cursor: pointer;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 800;
   transition: background 0.3s, transform 0.2s;
 }
 
 .btn-guardar:hover {
   background: #1d4ed8;
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 /* 🧡 MURO */
 .muro {
   max-width: 1200px;
   margin: auto;
-  padding: 20px 30px 50px;
+  padding: 20px 20px 60px;
 }
 
 .muro h2 {
   text-align: center;
   margin-bottom: 30px;
+  font-size: 1.8rem;
 }
 
 /* 🧱 GRID */
@@ -161,7 +167,7 @@ body {
 .recuerdo {
   background: white;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.18);
   transform: rotate(-3deg);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -169,7 +175,7 @@ body {
 }
 
 .recuerdo:hover {
-  transform: rotate(0deg) scale(1.1);
+  transform: rotate(0deg) scale(1.08);
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
   z-index: 10;
 }
@@ -215,144 +221,48 @@ body {
   }
 }
 
-/* 📱 RESPONSIVE */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 10px;
+/* 📱 TABLET */
+@media (max-width: 900px) {
+  .titulo h1 {
+    font-size: 2rem;
   }
 
   .logo-izq,
   .logo-der {
-    height: 60px;
+    height: 65px;
+  }
+}
+
+/* 📱 CELULAR */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo-izq,
+  .logo-der {
+    height: 55px;
   }
 
   .titulo h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+  }
+
+  .titulo p {
+    font-size: 1rem;
+  }
+
+  .formulario {
+    margin: 20px 15px;
+    padding: 20px;
   }
 
   .recuerdo {
     transform: rotate(-1deg);
   }
-}
-* {
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-  font-family: 'Baloo 2', cursive;
-  background: #f0f6ff;
-}
-
-/* HEADER */
-.top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #1e3a8a;
-  color: white;
-  padding: 15px;
-}
-
-.logo, .decoracion {
-  height: 60px;
-}
-
-.titulo {
-  text-align: center;
-}
-
-/* FORMULARIO */
-.formulario {
-  background: white;
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 15px;
-}
-
-.formulario input,
-.formulario textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-family: inherit;
-}
-
-.frases button {
-  margin: 5px;
-  border: none;
-  background: #dbeafe;
-  padding: 8px 12px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.formulario button {
-  width: 100%;
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 12px;
-  margin-top: 5px;
-}
-
-.limpiar {
-  background: #64748b;
-}
-
-/* CONTROLES */
-.controles {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.controles button {
-  margin: 5px;
-  padding: 8px 15px;
-}
-
-/* MURO RESPONSIVE GRID */
-.muro {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-/* TARJETAS */
-.recuerdo {
-  background: white;
-  padding: 10px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.15);
-  transform: rotate(-2deg);
-  transition: transform .3s;
-}
-
-.recuerdo:hover {
-  transform: rotate(0) scale(1.05);
-}
-
-.recuerdo img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.recuerdo p {
-  margin: 5px 0;
-}
-
-/* CELULAR */
-@media (max-width: 600px) {
-  .top {
-    flex-direction: column;
-  }
-  .logo, .decoracion {
-    height: 40px;
+  .recuerdo:hover {
+    transform: scale(1.03);
   }
 }
-
-
