@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Clausura Vacacional 2026 | Colegio Unión</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>🌟 Clausura Vacacional 2026</h1>
+    <p>Colegio Unión – Muro de Recuerdos</p>
+  </header>
+
+  <section class="formulario">
+    <h2>📸 Comparte tu recuerdo</h2>
+
+    <input type="text" id="nombre" placeholder="Tu nombre">
+    <textarea id="comentario" placeholder="¿Qué aprendiste o cómo te pareció el vacacional?"></textarea>
+    <input type="file" id="foto" accept="image/*">
+
+    <button onclick="guardarRecuerdo()">Guardar recuerdo 💙</button>
+    <p id="estado"></p>
+  </section>
+
+  <section class="muro" id="muro">
+    <h2>🧡 Recuerdos</h2>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
