@@ -1,22 +1,27 @@
-// 🔥 CONFIGURA AQUÍ TU FIREBASE
+// 🔥 Firebase SDK (MODULAR)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
+
+// 🔐 TU CONFIGURACIÓN (YA ES CORRECTA)
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_PROYECTO.firebaseapp.com",
-  projectId: "TU_PROYECTO",
-  storageBucket: "TU_PROYECTO.appspot.com",
-  messagingSenderId: "XXXXXX",
-  appId: "XXXXXX"
+  apiKey: "AIzaSyBfVMmztzkntRXsJpwSb0czd4-WQPIm64I",
+  authDomain: "vacacional2026-b095d.firebaseapp.com",
+  projectId: "vacacional2026-b095d",
+  storageBucket: "vacacional2026-b095d.firebasestorage.app",
+  messagingSenderId: "278906276377",
+  appId: "1:278906276377:web:8b414a7a434ee0762ab888"
 };
 
 // Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const storage = firebase.storage();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
-// Guardar recuerdo
-function guardarRecuerdo() {
-  const nombre = document.getElementById("nombre").value;
-  const comentario = document.getElementById("comentario").value;
+// 🎯 GUARDAR RECUERDO
+window.guardarRecuerdo = async function () {
+  const nombre = document.getElementById("nombre").value.trim();
+  const comentario = document.getElementById("comentario").value.trim();
   const foto = document.getElementById("foto").files[0];
   const estado = document.getElementById("estado");
 
@@ -25,42 +30,51 @@ function guardarRecuerdo() {
     return;
   }
 
-  estado.innerText = "Subiendo recuerdo... ⏳";
+  estado.innerText = "⏳ Subiendo recuerdo...";
 
-  const refFoto = storage.ref("recuerdos/" + Date.now() + "_" + foto.name);
+  try {
+    const fotoRef = ref(storage, `recuerdos/${Date.now()}_${foto.name}`);
+    await uploadBytes(fotoRef, foto);
+    const fotoURL = await getDownloadURL(fotoRef);
 
-  refFoto.put(foto).then(() => {
-    refFoto.getDownloadURL().then((url) => {
-      db.collection("recuerdos").add({
-        nombre: nombre,
-        comentario: comentario,
-        foto: url,
-        fecha: new Date()
-      }).then(() => {
-        estado.innerText = "✅ Recuerdo guardado";
-        document.getElementById("nombre").value = "";
-        document.getElementById("comentario").value = "";
-        document.getElementById("foto").value = "";
-      });
+    await addDoc(collection(db, "recuerdos"), {
+      nombre,
+      comentario,
+      foto: fotoURL,
+      fecha: new Date()
     });
-  });
-}
 
-// Mostrar recuerdos
-db.collection("recuerdos")
-  .orderBy("fecha", "desc")
-  .onSnapshot((snapshot) => {
-    const muro = document.getElementById("muro");
-    muro.innerHTML = "<h2>🧡 Recuerdos</h2>";
+    estado.innerText = "✅ Recuerdo guardado con éxito";
+    document.getElementById("nombre").value = "";
+    document.getElementById("comentario").value = "";
+    document.getElementById("foto").value = "";
 
-    snapshot.forEach((doc) => {
-      const r = doc.data();
-      muro.innerHTML += `
-        <div class="recuerdo">
-          <img src="${r.foto}">
-          <h3>${r.nombre}</h3>
-          <p>${r.comentario}</p>
-        </div>
-      `;
-    });
+  } catch (error) {
+    console.error(error);
+    estado.innerText = "❌ Error al guardar el recuerdo";
+  }
+};
+
+// 🧡 MOSTRAR RECUERDOS EN TIEMPO REAL
+const muro = document.getElementById("muro");
+
+const q = query(
+  collection(db, "recuerdos"),
+  orderBy("fecha", "desc")
+);
+
+onSnapshot(q, (snapshot) => {
+  muro.innerHTML = "<h2>🧡 Recuerdos</h2>";
+
+  snapshot.forEach((doc) => {
+    const r = doc.data();
+    muro.innerHTML += `
+      <div class="recuerdo">
+        <img src="${r.foto}">
+        <h3>${r.nombre}</h3>
+        <p>${r.comentario}</p>
+      </div>
+    `;
   });
+});
+
