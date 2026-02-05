@@ -3,37 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <title>Clausura Vacacional 2026 | Colegio Unión</title>
+
+  <!-- 🎒 Fuente educativa -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <!-- 🎨 Estilos -->
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-  <header>
-    <h1>🌟 Clausura Vacacional 2026</h1>
-    <p>Colegio Unión – Muro de Recuerdos</p>
+  <!-- 🏫 HEADER CON LOGOS -->
+  <header class="header">
+    <img src="logo-colegio.png" class="logo-izq" alt="Logo Colegio Unión">
+
+    <div class="titulo">
+      <h1>Clausura Vacacional 2026</h1>
+      <p>Colegio Unión – Muro de Recuerdos</p>
+    </div>
+
+    <img src="imagen-derecha.png" class="logo-der" alt="Vacacional">
   </header>
 
+  <!-- ✍️ FORMULARIO -->
   <section class="formulario">
     <h2>📸 Comparte tu recuerdo</h2>
 
-    <input type="text" id="nombre" placeholder="Tu nombre">
-    <textarea id="comentario" placeholder="¿Qué aprendiste o cómo te pareció el vacacional?"></textarea>
-    <input type="file" id="foto" accept="image/*">
+    <label class="label">Mi nombre es:</label>
+    <input type="text" id="nombre" placeholder="Escribe tu nombre">
 
-    <button onclick="guardarRecuerdo()">Guardar recuerdo 💙</button>
+    <label class="label">Mi recuerdo:</label>
+    <textarea id="comentario" placeholder="Escribe tu recuerdo aquí..."></textarea>
+
+    <!-- ✨ FRASES PREDEFINIDAS -->
+    <div class="frases">
+      <button type="button" onclick="ponerFrase('Me gustó porque conocí a mi mejor amigo')">💛 Mejor amigo</button>
+      <button type="button" onclick="ponerFrase('Tuve la maestra más atenta')">👩‍🏫 Maestra</button>
+      <button type="button" onclick="ponerFrase('Me gustó porque aprendí mucho')">📚 Aprendizaje</button>
+    </div>
+
+    <!-- 📷 FOTO -->
+    <input type="file" id="foto" accept="image/*" onchange="previewFoto()">
+
+    <!-- 👀 PREVIEW -->
+    <img id="preview" class="preview" alt="Vista previa">
+
+    <button class="btn-guardar" onclick="guardarRecuerdo()">Guardar recuerdo 💙</button>
     <p id="estado"></p>
   </section>
 
+  <!-- 🧡 MURAL -->
   <section class="muro" id="muro">
     <h2>🧡 Recuerdos</h2>
+    <!-- aquí Firebase pinta los recuerdos -->
   </section>
 
-  <!-- 🔥 TU APP REAL -->
+  <!-- 🔥 APP PRINCIPAL (NO TOCAR) -->
   <script type="module" src="./app.js"></script>
 
-</body>
-</html>
+  <!-- ✨ JS UI (NO FIREBASE) -->
+  <script>
+    function ponerFrase(texto) {
+      document.getElementById("comentario").value = texto;
+    }
 
+    function previewFoto() {
+      const file = document.getElementById("foto").files[0];
+      const img = document.getElementById("preview");
+      if (file) {
+        img.src = URL.createObjectURL(file);
+        img.style.display = "block";
+      }
+    }
+  </script>
 
-  <script src="https://www.gstatic.com/firebasejs/..."></script>
 </body>
 </html>
