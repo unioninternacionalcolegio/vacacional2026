@@ -77,4 +77,37 @@ onSnapshot(q, (snapshot) => {
     `;
   });
 });
+let muroCerrado = false;
+
+window.frase = (texto) => {
+  document.getElementById("comentario").value = texto;
+};
+
+window.limpiar = () => {
+  nombre.value = "";
+  comentario.value = "";
+  foto.value = "";
+};
+
+window.cerrarMuro = () => {
+  if (confirm("¿Cerrar el muro?")) {
+    muroCerrado = true;
+    document.getElementById("formulario").style.display = "none";
+  }
+};
+
+window.modoProfe = () => {
+  const clave = prompt("Clave de profesores:");
+  if (clave === "union2026") {
+    document.getElementById("formulario").style.display = "block";
+    muroCerrado = false;
+  } else {
+    alert("Clave incorrecta");
+  }
+};
+
+// dentro de guardarRecuerdo(), agrega:
+document.getElementById("sonido").play();
+confetti({ particleCount: 150, spread: 70 });
+
 
